@@ -22,7 +22,6 @@ export class BackupStack extends Stack {
     const plan = aws_backup.BackupPlan.dailyWeeklyMonthly5YearRetention(this, 'Plan', vault);
     plan.addSelection('Selection', {
       resources: [
-        // aws_backup.BackupResource.fromConstruct(rds.ServerlessCluster),
         aws_backup.BackupResource.fromTag('aws_backup', 'true'), // All resources that are tagged stage=prod in the region/account
 
       ]
