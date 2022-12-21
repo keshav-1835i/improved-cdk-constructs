@@ -3,7 +3,7 @@ import cdk = require('aws-cdk-lib');
 import { Stack } from 'aws-cdk-lib';
 import { Repository } from 'aws-cdk-lib/aws-ecr';
 import { Construct } from 'constructs';
-import { ECRCfg } from '../../interfaces/lib/ecr/interfaces';
+import { ECRCfg } from '@harshadbhatia/improved-cdk-constructs/interfaces/lib/ecr/interfaces';
 import { AccountPrincipal, Effect, PolicyStatement, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
 
 
@@ -20,6 +20,7 @@ export class ECRStack extends Stack {
 
       const r = new Repository(this, `Repo${repo.repositoryName.replace("-", "")}`, {
         repositoryName: repo.repositoryName,
+        imageScanOnPush: true
       })
 
       r.addToResourcePolicy(new PolicyStatement({
@@ -31,7 +32,8 @@ export class ECRStack extends Stack {
           "ecr:PutImage",
           "ecr:InitiateLayerUpload",
           "ecr:UploadLayerPart",
-          "ecr:CompleteLayerUpload"
+          "ecr:CompleteLayerUpload",
+          "ecr:DescribeRepositories"
         ],
         principals: repo.allowAccountAccess.map(a => {
           return new AccountPrincipal(a)
