@@ -1,9 +1,9 @@
-export interface BackupStackConfig {
+export interface BackupStackProps {
   stackName: string;
-  backups: BackupConfig[];
+  backups: BackupStack[];
 }
 
-export interface BackupConfig {
+export interface BackupStack {
   name: string;
   rule_schedule: string;
 }

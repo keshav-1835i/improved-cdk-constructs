@@ -5,14 +5,12 @@ import {
   StackProps
 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { BackupStackConfig } from '../../interfaces/lib/aws_backup/interfaces';
-import rds = require('aws-cdk-lib/aws-rds');
-
+import { BackupStackProps } from '../../interfaces/lib/aws_backup/interfaces';
 export class BackupStack extends Stack {
 
-  config: BackupStackConfig;
+  config: BackupStackProps;
 
-  constructor(scope: Construct, id: string, cmk: aws_kms.Key, config: BackupStackConfig, props?: StackProps) {
+  constructor(scope: Construct, id: string, cmk: aws_kms.Key, config: BackupStackProps, props?: StackProps) {
     super(scope, id, props);
     this.config = config
 
