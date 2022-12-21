@@ -6,13 +6,13 @@ import {
 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { HostedZone } from 'aws-cdk-lib/aws-route53';
-import { ACMConfig, ACMStackConfig } from '../../interfaces/lib/acm/interfaces';
+import { ACMProps, ACMStackProps } from '../../interfaces/lib/acm/interfaces';
 
 export class ACMStack extends Stack {
 
-  config: ACMStackConfig;
+  config: ACMStackProps;
 
-  constructor(scope: Construct, id: string, config: ACMStackConfig, props?: StackProps) {
+  constructor(scope: Construct, id: string, config: ACMStackProps, props?: StackProps) {
     super(scope, id, props);
     this.config = config
     
@@ -29,7 +29,7 @@ export class ACMStack extends Stack {
     })
   }
 
-  createACMs(domain: ACMConfig, hostedZone: HostedZone) {
+  createACMs(domain: ACMProps, hostedZone: HostedZone) {
     const lg = domain.name.split('.').slice(0, 2).join('');
 
     const certificate = new acm.Certificate(this, lg, {
@@ -54,7 +54,7 @@ export class ACMStack extends Stack {
 
   }
 
-  createCdnACMs(domain: ACMConfig, hostedZone: HostedZone) {
+  createCdnACMs(domain: ACMProps, hostedZone: HostedZone) {
     // For cloudfront distribution we need to create a certificate
     const cert = new acm.DnsValidatedCertificate(this, 'CrossRegionCertificate', {
       domainName: domain.certificateName,

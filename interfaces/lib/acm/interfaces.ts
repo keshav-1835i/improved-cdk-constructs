@@ -1,13 +1,13 @@
-export interface ACMStackConfig {
+export interface ACMStackProps {
   stackName: string;
   stackDescription: string;
 
-  acms?: ACMConfig[];
+  acms?: ACMProps[];
 
   cdnAcms?: string[]
 }
 
-export interface ACMConfig {
+export interface ACMProps {
   name: string;
   certificateName: string;
   subjectAlternativeDomainNames: string[];
