@@ -12,6 +12,7 @@ export interface ECRRepo {
     rules?: ECRRule[];
     lambdaContainer?: boolean;
     allowAccountAccess: string[];
+    scanOnPush?: boolean;
 }
 
 export interface ECRRule {

@@ -20,7 +20,7 @@ export class ECRStack extends Stack {
 
       const r = new Repository(this, `Repo${repo.repositoryName.replace("-", "")}`, {
         repositoryName: repo.repositoryName,
-        imageScanOnPush: true
+        imageScanOnPush: repo.scanOnPush
       })
 
       r.addToResourcePolicy(new PolicyStatement({
